@@ -1,5 +1,7 @@
 implementation of C# "using" statement in PHP
 
+[![Build Status](https://travis-ci.org/gonzalo123/using.png?branch=master)](https://travis-ci.org/gonzalo123/using)
+
 http://msdn.microsoft.com/en-us//library/yh598w02(v=vs.90).aspx
 
 ```php
