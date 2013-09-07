@@ -140,6 +140,7 @@ As we can see we can forget to close() our file instance. "using" will do it for
 
 We also can use an array of instances (implementing the IDisponsable interface of course)
 
+```php
 using([new Bar, new Foo], function (Bar $bar, Foo $foo) {
         echo $bar->hello("Gonzalo");
         echo $foo->hello("Gonzalo");
