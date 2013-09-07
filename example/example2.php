@@ -72,6 +72,8 @@ try {
 */
 
 /*
+ * It would be cool, isn't it?
+
 using(new File(__DIR__ . "/file.txt", 'w') {
         $file->write("Hello\n");
         $file->write("Hello\n");

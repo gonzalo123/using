@@ -83,7 +83,8 @@ try {
 
 # Better solution
 
-c# has using statement to solve this problem in a smart way.
+c# has "using" statement to solve this problem in a smart way.
+
 http://msdn.microsoft.com/en-us//library/yh598w02(v=vs.90).aspx
 
 We're going to implement something similar in PHP.
