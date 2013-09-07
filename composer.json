@@ -2,7 +2,7 @@
     "name": "gonzalo123/using",
     "description": "c# using statement implementation in PHP",
     "license": "MIT",
-    "keywords": ["using", "c#"],
+    "keywords": ["using"],
 
     "authors": [
         {
