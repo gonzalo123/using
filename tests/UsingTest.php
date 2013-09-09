@@ -7,32 +7,32 @@ class UsingTest extends \PHPUnit_Framework_TestCase
 {
     function test_simple_usage()
     {
-        $disponseCalled = false;
+        $disposeCalled = false;
 
         $foo = $this->getMockBuilder('Foo')->getMock();
         $foo->expects($this->any())
-            ->method('disponse')
-            ->will($this->returnCallback(function() use (&$disponseCalled) {
-                        $disponseCalled = true;
+            ->method('dispose')
+            ->will($this->returnCallback(function() use (&$disposeCalled) {
+                        $disposeCalled = true;
                     }));
 
-        $this->assertFalse($disponseCalled, 'disponse not called');
+        $this->assertFalse($disposeCalled, 'dispose not called');
 
         using($foo, function (Foo $foo) {
                 $foo->hello("Gonzalo");
             });
 
-        $this->assertTrue($disponseCalled, 'disponse has been called');
+        $this->assertTrue($disposeCalled, 'dispose has been called');
     }
 
     function test_exception()
     {
-        $disponseCalled = false;
+        $disposeCalled = false;
 
         $foo = $this->getMockBuilder('Foo')->getMock();
-        $foo->expects($this->any())->method('disponse')
-            ->will($this->returnCallback(function() use (&$disponseCalled) {
-                        $disponseCalled = true;
+        $foo->expects($this->any())->method('dispose')
+            ->will($this->returnCallback(function() use (&$disposeCalled) {
+                        $disposeCalled = true;
                     }));
 
         $foo->expects($this->any())->method('hello')
@@ -40,7 +40,7 @@ class UsingTest extends \PHPUnit_Framework_TestCase
                         throw new \Exception('hello function exception');
                     }));
 
-        $this->assertFalse($disponseCalled, 'disponse not called');
+        $this->assertFalse($disposeCalled, 'dispose not called');
 
         try {
             using($foo, function (Foo $foo) {
@@ -48,51 +48,51 @@ class UsingTest extends \PHPUnit_Framework_TestCase
                 });
         } catch (\Exception $e) {}
 
-        $this->assertTrue($disponseCalled, 'disponse has been called');
+        $this->assertTrue($disposeCalled, 'dispose has been called');
     }
 
-    function test_using_two_disponsables()
+    function test_using_two_disposables()
     {
-        $disponseCalled = [
+        $disposeCalled = [
             'foo' => false,
             'bar' => false,
         ];
 
         $foo = $this->getMockBuilder('Foo')->getMock();
-        $foo->expects($this->any())->method('disponse')
-            ->will($this->returnCallback(function() use (&$disponseCalled) {
-                        $disponseCalled['foo'] = true;
+        $foo->expects($this->any())->method('dispose')
+            ->will($this->returnCallback(function() use (&$disposeCalled) {
+                        $disposeCalled['foo'] = true;
                     }));
 
         $bar = $this->getMockBuilder('Bar')->getMock();
-        $bar->expects($this->any())->method('disponse')
-            ->will($this->returnCallback(function() use (&$disponseCalled) {
-                        $disponseCalled['bar'] = true;
+        $bar->expects($this->any())->method('dispose')
+            ->will($this->returnCallback(function() use (&$disposeCalled) {
+                        $disposeCalled['bar'] = true;
                     }));
 
-        $this->assertFalse($disponseCalled['foo'], 'Foo disponse has been called');
-        $this->assertFalse($disponseCalled['bar'], 'Bar disponse has been called');
+        $this->assertFalse($disposeCalled['foo'], 'Foo dispose has been called');
+        $this->assertFalse($disposeCalled['bar'], 'Bar dispose has been called');
 
         using([$foo, $bar], function (Foo $foo, Bar $bar) {
                 $foo->hello("Gonzalo");
                 $bar->hello("Gonzalo");
             });
 
-        $this->assertTrue($disponseCalled['foo'], 'Foo disponse has been called');
-        $this->assertTrue($disponseCalled['bar'], 'Bar disponse has been called');
+        $this->assertTrue($disposeCalled['foo'], 'Foo dispose has been called');
+        $this->assertTrue($disposeCalled['bar'], 'Bar dispose has been called');
     }
 
-    function test_using_two_disponsables_with_exceptions_calling_both_disponses()
+    function test_using_two_disponsables_with_exceptions_calling_both_disposes()
     {
-        $disponseCalled = [
+        $disposeCalled = [
             'foo' => false,
             'bar' => false,
         ];
 
         $foo = $this->getMockBuilder('Foo')->getMock();
-        $foo->expects($this->any())->method('disponse')
-            ->will($this->returnCallback(function() use (&$disponseCalled) {
-                        $disponseCalled['foo'] = true;
+        $foo->expects($this->any())->method('dispose')
+            ->will($this->returnCallback(function() use (&$disposeCalled) {
+                        $disposeCalled['foo'] = true;
                     }));
 
         $foo->expects($this->any())->method('hello')->will($this->returnCallback(function() {
@@ -100,13 +100,13 @@ class UsingTest extends \PHPUnit_Framework_TestCase
                 }));
 
         $bar = $this->getMockBuilder('Bar')->getMock();
-        $bar->expects($this->any())->method('disponse')
-            ->will($this->returnCallback(function() use (&$disponseCalled) {
-                        $disponseCalled['bar'] = true;
+        $bar->expects($this->any())->method('dispose')
+            ->will($this->returnCallback(function() use (&$disposeCalled) {
+                        $disposeCalled['bar'] = true;
                     }));
 
-        $this->assertFalse($disponseCalled['foo'], 'Foo disponse has been called');
-        $this->assertFalse($disponseCalled['bar'], 'Bar disponse has been called');
+        $this->assertFalse($disposeCalled['foo'], 'Foo dispose has been called');
+        $this->assertFalse($disposeCalled['bar'], 'Bar dispose has been called');
 
         try {
             using([$foo, $bar], function (Foo $foo, Bar $bar) {
@@ -115,7 +115,7 @@ class UsingTest extends \PHPUnit_Framework_TestCase
                 });
         } catch (\Exception $e) {}
 
-        $this->assertTrue($disponseCalled['foo'], 'Foo disponse has been called');
-        $this->assertTrue($disponseCalled['bar'], 'Bar disponse has been called');
+        $this->assertTrue($disposeCalled['foo'], 'Foo dispose has been called');
+        $this->assertTrue($disposeCalled['bar'], 'Bar dispose has been called');
     }
 }

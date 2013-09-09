@@ -2,31 +2,31 @@
 
 include __DIR__ . "/../vendor/autoload.php";
 
-use G\IDisponsable;
+use G\IDisposable;
 
-class Bar implements IDisponsable
+class Bar implements IDisposable
 {
     public function hello($name)
     {
         return "Hello {$name}";
     }
 
-    public function disponse()
+    public function dispose()
     {
-        echo "Disponse Bar";
+        echo "Dispose Bar";
     }
 }
 
-class Foo implements IDisponsable
+class Foo implements IDisposable
 {
     public function hello($name)
     {
         return "Hello {$name}";
     }
 
-    public function disponse()
+    public function dispose()
     {
-        echo "Disponse Foo";
+        echo "Dispose Foo";
     }
 }
 

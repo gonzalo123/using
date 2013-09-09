@@ -89,20 +89,20 @@ http://msdn.microsoft.com/en-us//library/yh598w02(v=vs.90).aspx
 
 We're going to implement something similar in PHP.
 
-First we will add G\IDisponsable interface to our File class
+First we will add G\IDisposable interface to our File class
 ```php
 namespace G;
 
-interface IDisponsable
+interface IDisposable
 {
-    public function disponse();
+    public function dispose();
 }
 ```
 
 Now our File class looks like this:
 
 ```php
-class File implements IDisponsable
+class File implements IDisposable
 {
     private $resource;
 
@@ -121,7 +121,7 @@ class File implements IDisponsable
         fclose($this->resource);
     }
 
-    public function disponse()
+    public function dispose()
     {
         $this->close();
     }
@@ -139,7 +139,7 @@ using(new File(__DIR__ . "/file.txt", 'w'), function (File $file) {
 
 As we can see we can forget to close() our file instance. "using" will do it for us, even if one exception is triggered inside.
 
-We also can use an array of instances (implementing the IDisponsable interface of course)
+We also can use an array of instances (implementing the IDisposable interface of course)
 
 ```php
 using([new Bar, new Foo], function (Bar $bar, Foo $foo) {

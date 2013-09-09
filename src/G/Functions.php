@@ -1,9 +1,9 @@
 <?php
 
-use G\IDisponsable;
+use G\IDisposable;
 
 /**
- * @param G\IDisponsable|G\IDisponsable[] $inputs
+ * @param G\IDisposable|G\IDisposable[] $inputs
  * @param callable $callback
  * @throws Exception
  */
@@ -15,8 +15,8 @@ function using($inputs, callable $callback=null)
 
     $disponser = function($inputs) {
         foreach ($inputs as $input) {
-            if ($input instanceof IDisponsable) {
-                $input->disponse();
+            if ($input instanceof IDisposable) {
+                $input->dispose();
             }
         }
     };

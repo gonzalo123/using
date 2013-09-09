@@ -2,9 +2,9 @@
 
 include __DIR__ . "/../vendor/autoload.php";
 
-use G\IDisponsable;
+use G\IDisposable;
 
-class File implements IDisponsable
+class File implements IDisposable
 {
     private $resource;
 
@@ -23,7 +23,7 @@ class File implements IDisponsable
         fclose($this->resource);
     }
 
-    public function disponse()
+    public function dispose()
     {
         $this->close();
     }

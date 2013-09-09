@@ -1,14 +1,14 @@
 <?php
 
-use G\IDisponsable;
+use G\IDisposable;
 
-class Bar implements IDisponsable
+class Bar implements IDisposable
 {
     public function hello($name)
     {
     }
 
-    public function disponse()
+    public function dispose()
     {
     }
 }
