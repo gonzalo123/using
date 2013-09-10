@@ -2,9 +2,9 @@
 
 include __DIR__ . "/../vendor/autoload.php";
 
-use G\IDisposable;
+use G\DisposableInterface;
 
-class Bar implements IDisposable
+class Bar implements DisposableInterface
 {
     public function hello($name)
     {
@@ -17,7 +17,7 @@ class Bar implements IDisposable
     }
 }
 
-class Foo implements IDisposable
+class Foo implements DisposableInterface
 {
     public function hello($name)
     {
@@ -30,7 +30,7 @@ class Foo implements IDisposable
     }
 }
 
-using([new Bar, new Foo], function (Bar $bar, Foo $foo) {
+using(new Bar, new Foo, function (Bar $bar, Foo $foo) {
         echo $bar->hello("Gonzalo");
         echo $foo->hello("Gonzalo");
     });

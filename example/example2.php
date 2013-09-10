@@ -2,9 +2,9 @@
 
 include __DIR__ . "/../vendor/autoload.php";
 
-use G\IDisposable;
+use G\DisposableInterface;
 
-class File implements IDisposable
+class File implements DisposableInterface
 {
     private $resource;
 

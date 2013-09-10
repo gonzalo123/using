@@ -73,7 +73,7 @@ class UsingTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($disposeCalled['foo'], 'Foo dispose has been called');
         $this->assertFalse($disposeCalled['bar'], 'Bar dispose has been called');
 
-        using([$foo, $bar], function (Foo $foo, Bar $bar) {
+        using($foo, $bar, function (Foo $foo, Bar $bar) {
                 $foo->hello("Gonzalo");
                 $bar->hello("Gonzalo");
             });
@@ -109,7 +109,7 @@ class UsingTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($disposeCalled['bar'], 'Bar dispose has been called');
 
         try {
-            using([$foo, $bar], function (Foo $foo, Bar $bar) {
+            using($foo, $bar, function (Foo $foo, Bar $bar) {
                     $foo->hello("Gonzalo");
                     $bar->hello("Gonzalo");
                 });
