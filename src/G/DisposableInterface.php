@@ -1,8 +1,7 @@
 <?php
-
 namespace G;
 
-interface IDisposable
+interface DisposableInterface
 {
     public function dispose();
 }

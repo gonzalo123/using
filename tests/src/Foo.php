@@ -1,8 +1,8 @@
 <?php
 
-use G\IDisposable;
+use G\DisposableInterface;
 
-class Foo implements IDisposable
+class Foo implements DisposableInterface
 {
     public function hello($name)
     {
