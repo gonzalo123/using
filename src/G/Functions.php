@@ -18,14 +18,18 @@ function using(/* $input1, $input2, ... $inputN, $callback */)
     if (!is_callable($callback))
         throw new Exception('using() requires the last parameter to be a callable');
 
-    try {
-        call_user_func_array($callback, $params);
-    } catch (Exception $ex) {
-      throw $ex;
-    } finally {
+    $cleanup = function () use ($params) {
         foreach ($params as $p) {
             if ($p instanceof DisposableInterface)
                 $p->dispose();
         }
+    };
+
+    try {
+        call_user_func_array($callback, $params);
+        $cleanup();
+    } catch (Exception $ex) {
+        $cleanup();
+        throw $ex;
     }
 }
