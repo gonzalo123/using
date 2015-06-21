@@ -7,13 +7,13 @@ use G\IDisposable;
  * @param callable $callback
  * @throws Exception
  */
-function using($inputs, callable $callback=null)
+function using($inputs, callable $callback = null)
 {
     if (!is_array($inputs)) {
         $inputs = [$inputs];
     }
 
-    $disponser = function($inputs) {
+    $disponser = function ($inputs) {
         foreach ($inputs as $input) {
             if ($input instanceof IDisposable) {
                 $input->dispose();
